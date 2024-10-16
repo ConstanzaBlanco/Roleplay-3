@@ -7,10 +7,9 @@ public abstract class Hero
   public int AttackValue { get;}
   public List<IItem> Items { get; private set; }
   public string Name { get; private set; }
-  public int Vp { get;private set; }
+  public int Vp { get;set; }
   
-  private bool IsAlive { get; set; }
-
+  public bool IsAlive { get; private set; }
   public Hero(string name) //Se agrega virtual?
   {
     this.Name = name;
@@ -53,7 +52,7 @@ public abstract class Hero
     DefenseValue += item.DefenseValue;
   }
 
-  public void ModifyVp(int value)
+  public virtual void ModifyVp(int value)
   {
     Vp += value;
   }
