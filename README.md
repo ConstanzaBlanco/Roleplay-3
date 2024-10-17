@@ -13,6 +13,6 @@ Para empezar creamos la clase abstracta Character la cual tiene todos los parám
 
 Hero y Enemy heredan todo de Character pero el método para conseguir el VP varía dependiendo de cual de los dos sean, ambos son una clase abstracta para que los personajes puedan heredarlo de ellos (los que son evil heredan de enemy y los que son good de Hero). 
 
-El resto de clases e interfaces las dejamos como estaban.
+El resto de clases e interfaces las dejamos como estaban y no vimos necesario un cambio.
 
 
