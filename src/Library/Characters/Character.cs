@@ -2,66 +2,80 @@ namespace Ucu.Poo.RoleplayGame;
 
 public abstract class Character
 {
-    public int Health { get; private set; }
-    public int DefenseValue { get; private set; }
-    public int AttackValue { get;}
-    public List<IItem> Items { get; private set; }
-    public string Name { get; private set; }
-    public int Vp { get;set; }
-  
-    public bool IsAlive { get; private set; }
-    public Character(string name) //Se agrega virtual?
+    private int health;
+
+    private List<IItem> items = new List<IItem>();
+
+    public Character(string name)
     {
         this.Name = name;
-        this.IsAlive = true;
+    }
+
+    public string Name { get; set; }
+    public int AttackValue
+    {
+        get
+        {
+            int value = 0;
+            foreach (IItem item in this.items)
+            {
+                if (item is IAttackItem)
+                {
+                    value += (item as IAttackItem).AttackValue;
+                }
+            }
+            return value;
+        }
+    }
+
+    public int DefenseValue
+    {
+        get
+        {
+            int value = 0;
+            foreach (IItem item in this.items)
+            {
+                if (item is IDefenseItem)
+                {
+                    value += (item as IDefenseItem).DefenseValue;
+                }
+            }
+            return value;
+        }
+    }
+
+    public int Health
+    {
+        get
+        {
+            return this.health;
+        }
+        private set
+        {
+            this.health = value < 0 ? 0 : value;
+        }
+    }
+
+    public void ReceiveAttack(int power)
+    {
+        if (this.DefenseValue < power)
+        {
+            this.Health -= power - this.DefenseValue;
+        }
+    }
+
+    public void Cure()
+    {
+        this.Health = 100;
     }
 
     public void AddItem(IItem item)
     {
-        Items.Add(item);
+        this.items.Add(item);
     }
 
     public void RemoveItem(IItem item)
     {
-        Items.Remove(item);
-    }
-  
-    public void ReceiveAttack(IAttackItem item)
-    {
-
-        if (DefenseValue > item.AttackValue)
-        {
-            DefenseValue -= item.AttackValue;
-        }
-        else
-        {
-            Health -= item.AttackValue - DefenseValue;
-            DefenseValue = 0;
-            if (Health <= 0)
-            {
-                Health = 0;
-                IsAlive = false;
-                Console.WriteLine($"El personaje {Name} ha muerto.");
-            }
-        }
-    }
-
-    public void UseDefense(IDefenseItem item)
-    {
-        DefenseValue += item.DefenseValue;
-    }
-
-    public virtual void ModifyVp(int value)
-    {
-        Vp += value;
-    }
-
-    public List<IItem> GetIItems()
-    {
-        return Items;
-    }
-    public void Cure()
-    {
-        Health +=30 ;
+        this.items.Remove(item);
     }
 }
