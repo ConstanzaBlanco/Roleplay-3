@@ -41,4 +41,6 @@ public class SpellsBook: IMagicalAttackItem, IMagicalDefenseItem
     {
         this.spells.Remove(spell);
     }
+
+    public string Name { get; }
 }

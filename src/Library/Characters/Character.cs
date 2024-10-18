@@ -3,6 +3,7 @@ namespace Ucu.Poo.RoleplayGame;
 public abstract class Character
 {
     private int health;
+    protected int Vp;
 
     private List<IItem> items = new List<IItem>();
 
@@ -61,6 +62,18 @@ public abstract class Character
         if (this.DefenseValue < power)
         {
             this.Health -= power - this.DefenseValue;
+        }
+    }
+
+    public bool IsAlive()
+    {
+        if (Health > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 

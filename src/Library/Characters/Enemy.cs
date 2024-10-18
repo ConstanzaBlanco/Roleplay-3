@@ -5,12 +5,12 @@ public abstract class Enemy:Character
     public Enemy(string name, int vp)
         :base(name)
     { 
-        Vp = vp;
+        this.Vp = vp;
     }
 
     public void ModifyVp()
     {
-        if (this.IsAlive)
+        if (IsAlive())
         {
             this.Vp = 0;
             
