@@ -7,13 +7,5 @@ public abstract class Enemy:Character
     { 
         this.Vp = vp;
     }
-
-    public void ModifyVp()
-    {
-        if (!IsAlive())
-        {
-            this.Vp = 0;
-            
-        }
-    }
+    
 }

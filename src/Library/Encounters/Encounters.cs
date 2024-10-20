@@ -4,85 +4,104 @@ namespace Library.Encounters;
 
 public class Encounters
 {
-    private List<Character> listadeheroes = new List<Character>();
-    private List<Character> listadeenemigos = new List<Character>();
-    private bool turno;
+    private List<Hero> listadeheroes = new List<Hero>();
+    private List<Enemy> listadeenemigos = new List<Enemy>();
+    private List<Hero> listadeheroesenbatalla= new List<Hero>();
+    private List<Enemy> listadeenemigosenbatalla = new List<Enemy>();
     private bool batallainiciada;
     private bool batallaterminada;
-    private Character EnemigoLugar1;
-    private Character HeroeLugar1;
-    private Random random;
 
     public Encounters()
     {
-        turno = random.Next(2) == 0;
-        
+        batallainiciada = false;
+        batallaterminada = false;
+
     }
 
     public void DoEncounter()
     {
-        if (EnemigoLugar1 != null & HeroeLugar1 != null)
+        if (listadeheroes.Count > 0 && listadeenemigos.Count > 0)
         {
             batallainiciada = true;
             while (!batallaterminada)
             {
-                if (turno)
+                for (int i = 0; i < listadeenemigos.Count; i++)
                 {
-                    EjecutarAccion(listadeheroes, listadeenemigos);
+                    Enemy enemigoactual = listadeenemigos[i];
+                    int numeroatacante = i % listadeheroes.Count;
+                    Hero heroeactual = listadeheroes[numeroatacante];
+                    heroeactual.ReceiveAttack(enemigoactual.AttackValue);
+                    if (!heroeactual.IsAlive())
+                    {
+                        listadeheroes.Remove(heroeactual);
+                    }
                 }
-                else
+
+                RevisarCondiciones();
+                if (batallaterminada)
                 {
-                    // Turno de enemigos
-                    EjecutarAccion(listadeenemigos, listadeheroes);
+                    break;
                 }
-                AvanzarTurno();
+
+                for (int i = 0; i < listadeheroes.Count; i++)
+                {
+                    Hero heroeactual = listadeheroes[i];
+                    int numeroatacante = i % listadeenemigos.Count;
+                    Enemy enemigoactual = listadeenemigos[numeroatacante];
+                    enemigoactual.ReceiveAttack(heroeactual.AttackValue);
+                    if (!enemigoactual.IsAlive())
+                    {
+                        listadeenemigos.Remove(enemigoactual);
+                        heroeactual.ModifyVp(enemigoactual.GetVp());
+                        if (heroeactual.GetVp() >= 5)
+                        {
+                            heroeactual.Cure();
+                            heroeactual.ModifyVp(-5); //Le retiro 5 vps por curarse
+                        }
+                    }
+                }
+                RevisarCondiciones();
+            }
+            Console.WriteLine("El encuentro ha terminado");
+            if (listadeheroes.Count > 0)
+            {
+                Console.WriteLine("Ha ganado el equipo de los heroes");
+            }
+            else
+            {
+                Console.WriteLine("Ha ganado el equipo enemigo");
             }
         }
     }
 
-    private void EjecutarAccion(List<Character> atacantes, List<Character> defensores)
+    private void RevisarCondiciones()
     {
-        int numero = random.Next(atacantes[0].Items.Count);
-        IItem arma = atacantes[0].Items[numero];
-        if (arma is IAttackItem armaataque)
+        bool malosvivos = false;
+        for (int i = listadeenemigos.Count - 1; i >= 0; i--)
         {
-            defensores[0].ReceiveAttack(armaataque);
+            if (listadeenemigos[i].IsAlive())
+            {
+                malosvivos = true;
+            }
         }
-        if (arma is IDefenseItem armadefensa)
+        bool heroesvivos = false;
+        for (int i = listadeheroes.Count - 1; i >= 0; i--)
         {
-            atacantes[0].UseDefense(armadefensa);
+            if (listadeheroes[i].IsAlive())
+            {
+                heroesvivos = true;
+            }
         }
-    }
-
-    private void AvanzarTurno()
-    {
-        if (!RevisarCondiciones())
-        {
-            
-        }
-        turno = !turno;
-    }
-
-    private bool RevisarCondiciones()
-    {
-        if ()
+        batallaterminada = heroesvivos && malosvivos;
     }
     
     public void AddHeroe(Hero heroe)
     {
-        if (listadeheroes.Count < 1)
-        {
-            HeroeLugar1 = heroe;
-        }
         listadeheroes.Add(heroe);
     }
     
     public void AddEnemy(Enemy enemigo)
     {
-        if (listadeenemigos.Count < 1)
-        {
-            EnemigoLugar1 = enemigo;
-        }
         listadeenemigos.Add(enemigo);
     }
 }

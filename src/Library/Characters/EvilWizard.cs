@@ -4,7 +4,10 @@ public class EvilWizard:Enemy,IMagicCharacter
 {
     private List<IMagicalItem> magicalIItems = new List<IMagicalItem>();
 
-    public EvilWizard(string name, int vp) : base(name, vp){}
+    public EvilWizard(string name, int vp) : base(name, vp)
+    {
+        AddItem(new Staff());
+    }
     
     public void AddItem(IMagicalItem item)
     {

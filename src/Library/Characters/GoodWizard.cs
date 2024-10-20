@@ -16,5 +16,6 @@ public class GoodWizard:Character,IMagicCharacter
 
     public GoodWizard(string name) : base(name)
     {
+        this.AddItem(new Staff());
     }
 }

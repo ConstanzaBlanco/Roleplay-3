@@ -2,7 +2,7 @@
 
   public abstract class Hero :Character
   {
-      public Hero(string name)
+      protected Hero(string name)
           :base(name)
       { 
           Vp = 0;

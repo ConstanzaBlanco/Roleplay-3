@@ -5,7 +5,7 @@ public abstract class Character
     protected int health;
     protected int Vp;
 
-    private List<IItem> items = new List<IItem>();
+    protected List<IItem> items = new List<IItem>();
 
     public Character(string name)
     {
@@ -28,7 +28,10 @@ public abstract class Character
             return value;
         }
     }
-
+    public int GetVp()
+    {
+        return Vp;
+    }
     public int DefenseValue
     {
         get
@@ -62,6 +65,11 @@ public abstract class Character
         if (this.DefenseValue < power)
         {
             this.Health -= power - this.DefenseValue;
+            Console.WriteLine($"{Name} ha recibido {power-DefenseValue} de daño, quedandose a {Health} de vida");
+        }
+        else
+        {
+            Console.WriteLine($"{Name} no ha recibido daño, su defensa es mayor");
         }
     }
 
