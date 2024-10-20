@@ -8,7 +8,7 @@
           Vp = 0;
       }
 
-      public virtual void ModifyVp(int value)
+      public void ModifyVp(int value)
       {
           Vp += value;
       }
