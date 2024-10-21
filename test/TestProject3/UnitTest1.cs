@@ -133,4 +133,59 @@ public class Tests
         //al menos 1 enemigo estos ganan, ya que antes ya confirmamos si los heroes de este encuentro estaban vivos.
         //Esto ocurre, ya que cuando muere un personaje, este es removido de su lista correspondiente automaticamente, quedando solo los vivos al final.
     }
+    [Test]
+    public void BatallaTerminada()
+        //Verificación de los bools se cambian correctamente al terminar una batalla
+    {
+        Hero flechaverde = new GoodArcher("FlechaVerde");
+        Hero dormilon = new GoodDwarf("Dormilon");
+        Enemy caballerodearkham = new EvilKnight("ArkhamKnight", 5);
+        Encounters encuentrolegendario = new Encounters();
+        encuentrolegendario.AddHeroe(dormilon);
+        encuentrolegendario.AddHeroe(flechaverde);
+        encuentrolegendario.AddEnemy(caballerodearkham);
+        encuentrolegendario.DoEncounter();
+        bool valordebatallaesperada = true;
+        Assert.AreEqual(valordebatallaesperada, encuentrolegendario.batallaterminada);
+    }
+    [Test]
+    public void BatallaNoTerminada()
+        //Como la batalla no termina en los 100 turno damos por centado que los personajes se estancaron (Es decir que ninguno puede dañar al otro y viseversa) 
+    {
+        Hero maguito = new GoodWizard("HarryPotter");
+        Enemy magomalvado = new EvilWizard("ElInnombrables", 5);
+        Encounters encuentrolegendario = new Encounters();
+        encuentrolegendario.AddHeroe(maguito);
+        encuentrolegendario.AddEnemy(magomalvado);
+        encuentrolegendario.DoEncounter();
+        bool valordebatallaesperada = false;
+        Assert.AreEqual(valordebatallaesperada, encuentrolegendario.batallaterminada);
+    }
+    [Test]
+    public void BatallaNoIniciada()
+        //La batalla no puede iniciar faltan personajes, por lo tanto el bool queda en falso
+    {
+        Hero enano = new GoodDwarf("Genaro");
+        Encounters encuentrodistinto = new Encounters();
+        encuentrodistinto.AddHeroe(enano);
+        encuentrodistinto.DoEncounter();
+        bool valordebatallaesperada = false;
+        Assert.AreEqual(valordebatallaesperada, encuentrodistinto.batallainiciada);
+    }
+    [Test]
+    public void BatallaIniciada()
+        //La batalla se puede iniciar, cambiando el bool
+    {
+        Hero baltazar = new GoodWizard("Baltasar");
+        Hero sombra = new GoodArcher("Sombra");
+        Enemy guerrerooscuro = new EvilKnight("GuerreroOscuro", 10);
+        Encounters batallaEpica = new Encounters();
+        batallaEpica.AddHeroe(baltazar);
+        batallaEpica.AddHeroe(sombra);
+        batallaEpica.AddEnemy(guerrerooscuro);
+        batallaEpica.DoEncounter();
+        bool resultadoEsperado = true;
+        Assert.AreEqual(resultadoEsperado, batallaEpica.batallainiciada);
+    }
+    
 }

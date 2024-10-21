@@ -6,8 +6,8 @@ public class Encounters
 {
     private List<Hero> listadeheroes = new List<Hero>();
     private List<Enemy> listadeenemigos = new List<Enemy>();
-    private bool batallainiciada;
-    private bool batallaterminada;
+    public bool batallainiciada { get; private set; }
+    public bool batallaterminada { get; private set; }
 
     public Encounters()
     {
@@ -25,10 +25,12 @@ public class Encounters
     {
         if (listadeheroes.Count > 0 && listadeenemigos.Count > 0)
         {
+            int contadordeturnos = 0;
             Console.WriteLine("");
             batallainiciada = true;
-            while (!batallaterminada)
+            while (!batallaterminada && contadordeturnos < 100)
             {
+                contadordeturnos++;
                 for (int i = 0; i < listadeenemigos.Count && listadeheroes.Count > 0; i++) //Asi evitamos el throw exception de divisibilidad entre 0
                 {
                     Enemy enemigoactual = listadeenemigos[i];
@@ -70,14 +72,22 @@ public class Encounters
                 }
                 RevisarCondiciones();
             }
-            Console.WriteLine("El encuentro ha terminado");
-            if (listadeheroes.Count > 0)
+
+            if (contadordeturnos > 99)
             {
-                Console.WriteLine("Ha ganado el equipo de los heroes");
+                Console.WriteLine("El encuentro se ha vuevlto infinito, nadie puede hacer ni recibir daño");
             }
             else
             {
-                Console.WriteLine("Ha ganado el equipo enemigo");
+                Console.WriteLine("El encuentro ha terminado");
+                if (listadeheroes.Count > 0)
+                {
+                    Console.WriteLine("Ha ganado el equipo de los heroes");
+                }
+                else
+                {
+                    Console.WriteLine("Ha ganado el equipo enemigo");
+                }
             }
         }
         else

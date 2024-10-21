@@ -7,11 +7,13 @@ class Program
 {
     static void Main(string[] args)
     {
-        Hero arquero1 = new GoodArcher("Pedro");
-        Enemy arquero2 = new EvilArcher("Juan",30);
-        Encounters encuentro1 = new Encounters();
-        encuentro1.AddHeroe(arquero1);
-        encuentro1.AddEnemy(arquero2);
-        encuentro1.DoEncounter();
+        Hero flechaverde = new GoodArcher("FlechaVerde");
+        Hero gruñon = new GoodDwarf("Gruñon");
+        Enemy caballerodearkham = new EvilKnight("ArkhamKnight", 5);
+        Encounters encuentrolegendario = new Encounters();
+        encuentrolegendario.AddHeroe(gruñon);
+        encuentrolegendario.AddHeroe(flechaverde);
+        encuentrolegendario.AddEnemy(caballerodearkham);
+        encuentrolegendario.DoEncounter(); 
     }
 }
