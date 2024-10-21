@@ -68,6 +68,7 @@ public class GoodWizard: Character,IMagicCharacter
     public GoodWizard(string name) : base(name)
     {
         this.AddItem(new Staff());
+        this.health = 20;
     }
 }
  

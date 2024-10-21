@@ -7,6 +7,7 @@ public class EvilWizard:Enemy,IMagicCharacter
     public EvilWizard(string name, int vp) : base(name, vp)
     {
         this.AddItem(new Staff());
+        this.health = 20;
     }
     
     public void AddItem(IMagicalItem item)
