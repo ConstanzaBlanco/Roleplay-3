@@ -6,8 +6,6 @@ public class Encounters
 {
     private List<Hero> listadeheroes = new List<Hero>();
     private List<Enemy> listadeenemigos = new List<Enemy>();
-    private List<Hero> listadeheroesenbatalla= new List<Hero>();
-    private List<Enemy> listadeenemigosenbatalla = new List<Enemy>();
     private bool batallainiciada;
     private bool batallaterminada;
 
@@ -77,23 +75,27 @@ public class Encounters
     private void RevisarCondiciones()
     {
         bool malosvivos = false;
-        for (int i = listadeenemigos.Count - 1; i >= 0; i--)
+        for (int i = 0; i < listadeenemigos.Count; i++)
         {
             if (listadeenemigos[i].IsAlive())
             {
                 malosvivos = true;
+                break;
             }
         }
+
         bool heroesvivos = false;
-        for (int i = listadeheroes.Count - 1; i >= 0; i--)
+        for (int i = 0; i < listadeheroes.Count; i++)
         {
             if (listadeheroes[i].IsAlive())
             {
                 heroesvivos = true;
+                break; 
             }
         }
-        batallaterminada = heroesvivos && malosvivos;
+        batallaterminada = !(heroesvivos && malosvivos);
     }
+
     
     public void AddHeroe(Hero heroe)
     {
