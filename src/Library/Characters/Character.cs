@@ -13,7 +13,7 @@ public abstract class Character
     }
 
     public string Name { get; set; }
-    public int AttackValue
+    public virtual int AttackValue
     {
         get
         {

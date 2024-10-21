@@ -13,9 +13,36 @@ public class GoodWizard:Character,IMagicCharacter
     {
         this.magicalIItems.Remove(item);
     }
+    
+    
+    public override int AttackValue
+    {
+        get
+        {
+            int value = 0;
+            
+            foreach (IItem item in this.items)
+            {
+                if (item is IAttackItem)
+                {
+                    value += (item as IAttackItem).AttackValue;
+                }
+            }
+            
+            foreach (IMagicalItem item in this.magicalIItems)
+            {
+                if (item is IMagicalAttackItem)
+                {
+                    value += (item as IMagicalAttackItem).AttackValue;
+                }
+            }
 
+            return value;
+        }
+    }
     public GoodWizard(string name) : base(name)
     {
         this.AddItem(new Staff());
     }
 }
+ 

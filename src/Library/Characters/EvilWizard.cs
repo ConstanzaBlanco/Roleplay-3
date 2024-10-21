@@ -6,7 +6,7 @@ public class EvilWizard:Enemy,IMagicCharacter
 
     public EvilWizard(string name, int vp) : base(name, vp)
     {
-        AddItem(new Staff());
+        this.AddItem(new Staff());
     }
     
     public void AddItem(IMagicalItem item)
@@ -17,6 +17,32 @@ public class EvilWizard:Enemy,IMagicCharacter
     public void RemoveItem(IMagicalItem item)
     {
         this.magicalIItems.Remove(item);
+    }
+    
+    public override int AttackValue
+    {
+        get
+        {
+            int value = 0;
+            
+            foreach (IItem item in this.items)
+            {
+                if (item is IAttackItem)
+                {
+                    value += (item as IAttackItem).AttackValue;
+                }
+            }
+            
+            foreach (IMagicalItem item in this.magicalIItems)
+            {
+                if (item is IMagicalAttackItem)
+                {
+                    value += (item as IMagicalAttackItem).AttackValue;
+                }
+            }
+
+            return value;
+        }
     }
     
 }
