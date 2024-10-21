@@ -32,7 +32,7 @@ public abstract class Character
     {
         return Vp;
     }
-    public int DefenseValue
+    public virtual int DefenseValue
     {
         get
         {

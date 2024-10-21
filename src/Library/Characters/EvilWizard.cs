@@ -44,5 +44,27 @@ public class EvilWizard:Enemy,IMagicCharacter
             return value;
         }
     }
+    public override int DefenseValue
+    {
+        get
+        {
+            int value = 0;
+            foreach (IItem item in this.items)
+            {
+                if (item is IDefenseItem)
+                {
+                    value += (item as IDefenseItem).DefenseValue;
+                }
+            }
+            foreach (IMagicalItem item in magicalIItems)
+            {
+                if (item is IMagicalDefenseItem)
+                {
+                    value += (item as IMagicalDefenseItem).DefenseValue;
+                }
+            }
+            return value;
+        }
+    }
     
 }
