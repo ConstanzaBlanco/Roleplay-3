@@ -1,6 +1,6 @@
 namespace Ucu.Poo.RoleplayGame;
 
-public class GoodWizard: Character,IMagicCharacter
+public class GoodWizard: Hero,IMagicCharacter
 {
     private List<IMagicalItem> magicalIItems = new List<IMagicalItem>();
     
