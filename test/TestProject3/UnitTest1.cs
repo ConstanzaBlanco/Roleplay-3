@@ -2,6 +2,7 @@ using Library.Encounters;
 using Ucu.Poo.RoleplayGame;
 
 namespace TestProject2;
+
 public class Tests
 {
     [Test]
@@ -19,7 +20,7 @@ public class Tests
         encuentro1.DoEncounter();
         int vidaesperadaenemigo = 90;
         int vidaobtenidaenemigo = caballero1.Health;
-        Assert.AreEqual(vidaobtenidaenemigo,vidaobtenidaenemigo);
+        Assert.AreEqual(vidaobtenidaenemigo, vidaobtenidaenemigo);
     }
 
     [Test]
@@ -37,10 +38,10 @@ public class Tests
         encuentro1.DoEncounter();
         int vidaesperadaArquero = 0;
         int vidaobtenidaArquero = arquero2.Health;
-        Assert.AreEqual(vidaesperadaArquero,vidaobtenidaArquero);
+        Assert.AreEqual(vidaesperadaArquero, vidaobtenidaArquero);
         int vidaesperadaEnemigo = 0;
         int vidaobtenidaEnemigo = enano2.Health;
-        Assert.AreEqual(vidaesperadaEnemigo,vidaobtenidaEnemigo);
+        Assert.AreEqual(vidaesperadaEnemigo, vidaobtenidaEnemigo);
 
     }
 
@@ -63,10 +64,10 @@ public class Tests
         encuentro1.DoEncounter();
         int vpEsperado = 4;
         int vpObtenido = mago1.GetVp();
-        Assert.AreEqual(vpEsperado,vpObtenido);
+        Assert.AreEqual(vpEsperado, vpObtenido);
         int vidaEsperadaMago = 20;
         int vidaObtenidaMago = mago1.Health;
-        Assert.AreEqual(vidaEsperadaMago,vidaObtenidaMago);
+        Assert.AreEqual(vidaEsperadaMago, vidaObtenidaMago);
     }
 
     [Test]
@@ -77,14 +78,14 @@ public class Tests
         //lo unico que cambia es quien comenza el combate, por lo que las vidas van a ir bajando casi a la par en cada turno.
         //Heroe-Enemigo: 83-100, 66-83, 49-66, 32-49, 15-32, 0-15.
         Hero arquero1 = new GoodArcher("Pedro");
-        Enemy arquero2 = new EvilArcher("Juan",30);
+        Enemy arquero2 = new EvilArcher("Juan", 30);
         Encounters encuentro1 = new Encounters();
         encuentro1.AddHeroe(arquero1);
         encuentro1.AddEnemy(arquero2);
         encuentro1.DoEncounter();
         int vidaEsperadaPedro = 0;
         int vidaObtenidaPedro = arquero1.Health;
-        Assert.AreEqual(vidaObtenidaPedro,vidaEsperadaPedro);
+        Assert.AreEqual(vidaObtenidaPedro, vidaEsperadaPedro);
         //Este test es posible hacerlo con arquero,enano y caballero pero no con mago, ya que su valor de defensa es 100, y su valor de
         //ataque es de 100, por lo que si 2 Magos pelean, esta batala sera infinita, ya que nunca se bajan ni punto de vida el uno al otro.
     }
@@ -120,19 +121,21 @@ public class Tests
         int vidaEsperadaArquero = 0;
         int vidaObtenidaArquero = arquero1.Health;
         Assert.AreEqual(vidaEsperadaArquero, vidaObtenidaArquero);
-        
+
         bool enemigosGanan = false;
         int enemigosVivos = encuentro1.GetEnemigos().Count;
-        
+
         if (enemigosVivos > 0)
         {
             enemigosGanan = true;
         }
-        Assert.IsTrue(enemigosGanan); 
+
+        Assert.IsTrue(enemigosGanan);
         //Aca probamos si es verdad que los enemigos ganaron la batalla al contar cuantos quedan en la lista de enemigos, si la lista tiene
         //al menos 1 enemigo estos ganan, ya que antes ya confirmamos si los heroes de este encuentro estaban vivos.
         //Esto ocurre, ya que cuando muere un personaje, este es removido de su lista correspondiente automaticamente, quedando solo los vivos al final.
     }
+
     [Test]
     public void BatallaTerminada()
         //Verificación de los bools se cambian correctamente al terminar una batalla
@@ -148,6 +151,7 @@ public class Tests
         bool valordebatallaesperada = true;
         Assert.AreEqual(valordebatallaesperada, encuentrolegendario.batallaterminada);
     }
+
     [Test]
     public void BatallaNoTerminada()
         //Como la batalla no termina en los 100 turno damos por centado que los personajes se estancaron (Es decir que ninguno puede dañar al otro y viseversa) 
@@ -161,6 +165,7 @@ public class Tests
         bool valordebatallaesperada = false;
         Assert.AreEqual(valordebatallaesperada, encuentrolegendario.batallaterminada);
     }
+
     [Test]
     public void BatallaNoIniciada()
         //La batalla no puede iniciar faltan personajes, por lo tanto el bool queda en falso
@@ -172,6 +177,7 @@ public class Tests
         bool valordebatallaesperada = false;
         Assert.AreEqual(valordebatallaesperada, encuentrodistinto.batallainiciada);
     }
+
     [Test]
     public void BatallaIniciada()
         //La batalla se puede iniciar, cambiando el bool
@@ -187,5 +193,15 @@ public class Tests
         bool resultadoEsperado = true;
         Assert.AreEqual(resultadoEsperado, batallaEpica.batallainiciada);
     }
-    
+
+    [Test]
+    public void TestAtaqueAcumulado()
+    {
+        //Verificamos aún puede acumular ataque agregandole armas de atacas
+        Hero Batman = new GoodKnight("Batman"); //Ya tiene 40 de ataque al crearlo
+        Batman.AddItem(new Axe()); // El acha tiene 50 de ataque
+        int ataqueEsperado = 90; // 50 + 40 
+        Assert.AreEqual(ataqueEsperado, Batman.AttackValue);
+    }
+
 }
