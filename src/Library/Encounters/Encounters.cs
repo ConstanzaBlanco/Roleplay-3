@@ -16,6 +16,11 @@ public class Encounters
 
     }
 
+    public List<Enemy> GetEnemigos()
+    {
+        return this.listadeenemigos;
+    }
+
     public void DoEncounter()
     {
         if (listadeheroes.Count > 0 && listadeenemigos.Count > 0)
