@@ -6,7 +6,7 @@ public class Bow: IAttackItem
     {
         get
         {
-            return 15;
+            return 35;
         }
     }
 }

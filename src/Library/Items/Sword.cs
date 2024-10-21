@@ -6,7 +6,7 @@ public class Sword: IAttackItem
     {
         get
         {
-            return 20;
+            return 40;
         }
     }
 }

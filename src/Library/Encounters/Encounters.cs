@@ -70,6 +70,10 @@ public class Encounters
                 Console.WriteLine("Ha ganado el equipo enemigo");
             }
         }
+        else
+        {
+            Console.WriteLine("No se cuenta con los miembros necesarios para hacer la batalla");
+        }
     }
 
     private void RevisarCondiciones()

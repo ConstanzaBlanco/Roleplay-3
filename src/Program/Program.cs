@@ -1,4 +1,5 @@
 ﻿using System;
+using Library.Encounters;
 
 namespace Ucu.Poo.RoleplayGame.Program;
 
