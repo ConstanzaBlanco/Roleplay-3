@@ -8,4 +8,5 @@ public abstract class Enemy:Character
         this.Vp = vp;
     }
     
+    
 }
