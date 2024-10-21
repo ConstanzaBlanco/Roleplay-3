@@ -20,19 +20,22 @@ public class Encounters
     {
         if (listadeheroes.Count > 0 && listadeenemigos.Count > 0)
         {
+            Console.WriteLine("");
             batallainiciada = true;
             while (!batallaterminada)
             {
-                for (int i = 0; i < listadeenemigos.Count; i++)
+                for (int i = 0; i < listadeenemigos.Count && listadeheroes.Count > 0; i++) //Asi evitamos el throw exception de divisibilidad entre 0
                 {
                     Enemy enemigoactual = listadeenemigos[i];
                     int numeroatacante = i % listadeheroes.Count;
                     Hero heroeactual = listadeheroes[numeroatacante];
+                    Console.WriteLine($"{enemigoactual.Name} ha atacado a {heroeactual.Name}");
                     heroeactual.ReceiveAttack(enemigoactual.AttackValue);
                     if (!heroeactual.IsAlive())
                     {
                         listadeheroes.Remove(heroeactual);
                     }
+                    Console.WriteLine("");
                 }
 
                 RevisarCondiciones();
@@ -41,11 +44,12 @@ public class Encounters
                     break;
                 }
 
-                for (int i = 0; i < listadeheroes.Count; i++)
+                for (int i = 0; i < listadeheroes.Count && listadeenemigos.Count > 0; i++) //Asi evitamos el throw exception de que no llegue a ser 0 el divisor
                 {
                     Hero heroeactual = listadeheroes[i];
                     int numeroatacante = i % listadeenemigos.Count;
                     Enemy enemigoactual = listadeenemigos[numeroatacante];
+                    Console.WriteLine($"{heroeactual.Name} ha atacado a {enemigoactual.Name}");
                     enemigoactual.ReceiveAttack(heroeactual.AttackValue);
                     if (!enemigoactual.IsAlive())
                     {
@@ -57,6 +61,7 @@ public class Encounters
                             heroeactual.ModifyVp(-5); //Le retiro 5 vps por curarse
                         }
                     }
+                    Console.WriteLine("");
                 }
                 RevisarCondiciones();
             }
