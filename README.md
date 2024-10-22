@@ -25,4 +25,10 @@ Character:
 
 Todo esto aplica para Hero y Enemy también los cuales al ser una clase abstracta que hereda casi todo de Character, sus características son prácticamente las mismas
 
+Todos los tipos de personaje no mágicos (Evilknight, GoodArcher,etc):
+-Cumplen con SRP ya que tienen la responsabilidad única de representar el personaje (dependiendo de cual clase sea, qué personaje). Esto hace que cumplan con Expert al tener toda la información necesaria para representar dicho personaje.
+-Cumplen con LSP ya que pueden ser utilizados como un Enemy o Hero sin romper el comportamiento esperado.
+
+
+
 
