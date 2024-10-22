@@ -21,9 +21,6 @@ Character:
 
 -Cumple con SRP ya que se encarga de crear todo lo que debe tener un personaje, cosa que hace que cumpla con Expert al tener toda la información que debe tener uno.
 
--Cumple con DIP ya que las clases de alto nivel (Hero y Enemy) dependen de esta abstracción.
-
-
 -Cumple con LSP ya que Hero y Enemy al ser estar heredando de character, podrían sustituirlo sin que se rompa el código
 
 -Utiliza Plimorfismo ya que tiene metodos como el defenseValue los cuales se pueden sobreescribir en distintas partes del código.
