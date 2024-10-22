@@ -18,15 +18,21 @@ El resto de clases e interfaces las dejamos como estaban y no vimos necesario un
 # ¿Que tanto cumplen con los principios SOLID?
 
 Character:
+
 -Cumple con SRP ya que se encarga de crear todo lo que debe tener un personaje, cosa que hace que cumpla con Expert al tener toda la información que debe tener uno.
+
 -Cumple con DIP ya que las clases de alto nivel (Hero y Enemy) dependen de esta abstracción.
+
 -Cumple con LSP ya que Hero y Enemy al ser estar heredando de character, podrían sustituirlo sin que se rompa el código
+
 -Utiliza Plimorfismo ya que tiene metodos como el defenseValue los cuales se pueden sobreescribir en distintas partes del código.
 
 Todo esto aplica para Hero y Enemy también los cuales al ser una clase abstracta que hereda casi todo de Character, sus características son prácticamente las mismas
 
 Todos los tipos de personaje no mágicos (Evilknight, GoodArcher,etc):
+
 -Cumplen con SRP ya que tienen la responsabilidad única de representar el personaje (dependiendo de cual clase sea, qué personaje). Esto hace que cumplan con Expert al tener toda la información necesaria para representar dicho personaje.
+
 -Cumplen con LSP ya que pueden ser utilizados como un Enemy o Hero sin romper el comportamiento esperado.
 
 
