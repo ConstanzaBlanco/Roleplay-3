@@ -39,6 +39,7 @@ Good Wizard y EvilWizard:
 Todos los Items menos SpellsBook:
 
 -Cumplen con SRP ya que tienen la función única de brindar un dúmero de ataque o defensa fijo. Lo que los hace expertos en dicha información
+
 -Cumplen con LSP ya que pueden ser sustituídos por cualquier otro item que implemente la misma interfaz sin remper el funcionamiento del código.
 
 
@@ -48,4 +49,9 @@ SpellsBook:
 -Cumple con LSP ya que se puede crear otra clase que implemente IMagicalAttackItem y IMagicalDefenseItem sin afectar la lógica del código.
 -Incluye polimorfismo ya que los métodos AttackValue y DefenseValue invocan los métodos de cada ISpell, lo que permite que cada hechizo defina su propio cálculo sin que SpellsBook necesite en sí conocer los detalles.
 
+Encounters:
 
+-Cumple con SRP ya que tiene la única responsabilidad de gestionar la batalla entre los héroes y enemigos. Es experta en todo lo que gire en torno a esto, como las interacciones entre los personajes o cuando está terminada y cuando no.
+-Cumple con LSP ya que cualquier clase derivada de Hero/Enemy puede ser útil para implementar los métodos de encounters, siempre y cuando dicha clase implemente d emanera correcta Hero o Enemy.
+-Cumple con DIP ya que depende de clases abstractas de alto nivel que son Hero y Enemy.
+-Hay polimorfismo ya que puedes crear subclases que apliquen los métodos de encounters sin cambiar la lógica de la clase.
