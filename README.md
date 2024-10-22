@@ -36,5 +36,16 @@ Good Wizard y EvilWizard:
 -Cumplen con SRP ya que tienen la responsabilidad de gestionar sus items y cuanto daño hacen/reciben con ellos. Y también son Expertos en manejar dicha lógica.
 -Cumplen con LSP ya que pueden ser utilizados como un Enemy o Hero, siempre y cuando estos implementen IMagicCharacter, sin romper el comportamiento esperado.
 
+Todos los Items menos SpellsBook:
+
+-Cumplen con SRP ya que tienen la función única de brindar un dúmero de ataque o defensa fijo. Lo que los hace expertos en dicha información
+-Cumplen con LSP ya que pueden ser sustituídos por cualquier otro item que implemente la misma interfaz sin remper el funcionamiento del código.
+
+
+SpellsBook:
+
+-Cumple con SRP ya que tiene la responsabilidad de saber toda la lógica alrededor de los hechizos del libro. Esto lo vuelve experta en manejar la cantidad de hechizos que tiene libro y como afectan al item en sí.
+-Cumple con LSP ya que se puede crear otra clase que implemente IMagicalAttackItem y IMagicalDefenseItem sin afectar la lógica del código.
+-Incluye polimorfismo ya que los métodos AttackValue y DefenseValue invocan los métodos de cada ISpell, lo que permite que cada hechizo defina su propio cálculo sin que SpellsBook necesite en sí conocer los detalles.
 
 
