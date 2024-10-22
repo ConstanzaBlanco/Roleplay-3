@@ -36,5 +36,11 @@ Todos los tipos de personaje no mágicos (Evilknight, GoodArcher,etc):
 -Cumplen con LSP ya que pueden ser utilizados como un Enemy o Hero sin romper el comportamiento esperado.
 
 
+Good Wizard y EvilWizard:
+
+-Cumplen con SRP ya que tienen la responsabilidad de gestionar sus items y cuanto daño hacen/reciben con ellos. Y también son Expertos en manejar dicha lógica.
+
+-Cumplen con LSP ya que pueden ser utilizados como un Enemy o Hero, siempre y cuando estos implementen IMagicCharacter, sin romper el comportamiento esperado.
+
 
 
