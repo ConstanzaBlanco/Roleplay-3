@@ -6,42 +6,6 @@ namespace TestProject2;
 public class Tests
 
 {
-    // Definir los campos de clase para que estén disponibles en todos los métodos
-    private Hero caballerobueno1;
-    private Hero caballerobueno2;
-    private Hero caballerobueno3;
-    private Enemy caballeromalo;
-    private Enemy arqueromalo1;
-    private Enemy arqueromalo2;
-    private Enemy enanomalo2;
-    private Encounters encuentro1;
-    private Encounters encuentro2;
-
-
-    [SetUp]
-    public void Setup()
-    {
-        // Inicializar las variables en el Setup
-        caballerobueno1 = new GoodKnight("Shrek");  
-        caballerobueno2 = new GoodKnight("Arnold");  
-        caballeromalo = new EvilKnight("PrincipeEncantador", 6);
-        caballerobueno3 = new GoodKnight("Lancelot");
-        arqueromalo1 = new EvilArcher("Juan", 1);
-        arqueromalo2 = new EvilArcher("Pedro", 2);
-
-        encuentro1 = new Encounters();
-        encuentro1.AddHeroe(caballerobueno1);
-        encuentro1.AddHeroe(caballerobueno2);
-        encuentro1.AddEnemy(caballeromalo);
-        encuentro1.DoEncounter();
-
-        encuentro2 = new Encounters();
-        encuentro2.AddHeroe(caballerobueno3);
-        encuentro2.AddEnemy(arqueromalo1);
-        encuentro2.AddEnemy(arqueromalo2);
-        encuentro2.DoEncounter();
-
-    }
 
     [Test]
     public void GanaEnemigoSinDanio()
@@ -247,6 +211,15 @@ public class Tests
     [Test]
     public void TestCura() // Testeo que el héroe se cure tras vencer a un enemigo
     {
+        Hero caballerobueno1 = new GoodKnight("Shrek");  
+        Hero caballerobueno2 = new GoodKnight("Arnold");  
+        Enemy caballeromalo = new EvilKnight("PrincipeEncantador", 6);
+        Encounters encuentro1 = new Encounters();
+        encuentro1.AddHeroe(caballerobueno1);
+        encuentro1.AddHeroe(caballerobueno2);
+        encuentro1.AddEnemy(caballeromalo);
+        encuentro1.DoEncounter();
+        
         int vidaEsperada = 100;
         int vidaReal = caballerobueno2.Health;
         
@@ -256,7 +229,15 @@ public class Tests
 
     [Test]
     public void TestperdidadeVP() // Testeo que el heroe haya perdido 5 vp tras curarse
-    {
+    { 
+        Hero caballerobueno1 = new GoodKnight("Shrek");  
+        Hero caballerobueno2 = new GoodKnight("Arnold");  
+        Enemy caballeromalo = new EvilKnight("PrincipeEncantador", 6);
+        Encounters encuentro1 = new Encounters();
+        encuentro1.AddHeroe(caballerobueno1);
+        encuentro1.AddHeroe(caballerobueno2);
+        encuentro1.AddEnemy(caballeromalo);
+        encuentro1.DoEncounter();
         int vpEsperados = 1;
         int vpReales = caballerobueno2.GetVp();
         Assert.AreEqual(vpEsperados, vpReales); //el heroe perdió 5vp y se quedó con 1
@@ -265,6 +246,14 @@ public class Tests
     [Test]
     public void TestMismoVP() // Testeo que el caballero2 a pesar de haber contribuido en la pelea, no se quedó con los vp del enemigo 
     {
+       Hero caballerobueno1 = new GoodKnight("Shrek");  
+       Hero caballerobueno2 = new GoodKnight("Arnold");  
+       Enemy caballeromalo = new EvilKnight("PrincipeEncantador", 6);
+       Encounters encuentro1 = new Encounters();
+        encuentro1.AddHeroe(caballerobueno1);
+        encuentro1.AddHeroe(caballerobueno2);
+        encuentro1.AddEnemy(caballeromalo);
+        encuentro1.DoEncounter();
         int vpEsperados = 0;
         int vpReales = caballerobueno1.GetVp();
         
@@ -272,7 +261,16 @@ public class Tests
     }
     [Test]
     public void TestSumadeVP() //Testeo para ver que al derrotar a más de un enemigo, se suman los vp
-    {
+    { 
+        Hero caballerobueno3 = new GoodKnight("Lancelot");
+        Enemy arqueromalo1 = new EvilArcher("Juan", 1);
+        Enemy arqueromalo2 = new EvilArcher("Pedro", 2);
+        Encounters encuentro2 = new Encounters();
+        encuentro2.AddHeroe(caballerobueno3);
+        encuentro2.AddEnemy(arqueromalo1);
+        encuentro2.AddEnemy(arqueromalo2);
+        encuentro2.DoEncounter();
+
         int vpEsperados = 3;
         int vpReales = caballerobueno3.GetVp();
         
@@ -281,6 +279,15 @@ public class Tests
     [Test]
     public void TestNoCura() // Testeo que el caballero1 no se puede curar si tiene menos de 5 vp, (tendría 100 de vida sino)
     {
+       Hero caballerobueno3 = new GoodKnight("Lancelot");
+       Enemy  arqueromalo1 = new EvilArcher("Juan", 1);
+       Enemy arqueromalo2 = new EvilArcher("Pedro", 2);
+       Encounters encuentro2 = new Encounters();
+        encuentro2.AddHeroe(caballerobueno3);
+        encuentro2.AddEnemy(arqueromalo1);
+        encuentro2.AddEnemy(arqueromalo2);
+        encuentro2.DoEncounter();
+
         int vidaEsperada = 90;
         int vidaReal = caballerobueno3.Health;
         
