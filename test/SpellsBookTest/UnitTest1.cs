@@ -67,16 +67,16 @@ public class Tests
         SpellsBook Librito4 = new SpellsBook();
         Librito4.AddSpell(Hechizo7);
         Librito4.AddSpell(Hechizo8);
-        Hero Mago = new GoodWizard("Gandalf");
-        Enemy ArqueroMalo = new EvilArcher("Dobby",10);
-        Mago.AddItem(Librito4);
+        GoodWizard Mago = new GoodWizard("Gandalf");
+        EvilWizard MagoMalo = new EvilWizard("Dobby",10);
+        MagoMalo.AddItem(Librito4);
         Encounters encuentro = new Encounters();
         encuentro.AddHeroe(Mago);
-        encuentro.AddEnemy(ArqueroMalo);
+        encuentro.AddEnemy(MagoMalo);
         encuentro.DoEncounter();
-        int vidaesperadamago = 0;
-        int vidaobtenidamago = Mago.Health;
-        Assert.AreEqual(vidaobtenidamago,vidaesperadamago);
+        int estadodevidademagoesperado = 0;
+        int estadodevidaobtenido = Mago.Health;
+        Assert.AreEqual(estadodevidademagoesperado,estadodevidaobtenido);
 
     }
 }
