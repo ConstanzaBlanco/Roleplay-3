@@ -32,6 +32,10 @@ public class SpellsBook: IMagicalAttackItem, IMagicalDefenseItem
         }
     }
 
+    public List<ISpell> GetLista()
+    {
+        return this.spells;
+    }
     public void AddSpell(ISpell spell)
     {
         this.spells.Add(spell);
